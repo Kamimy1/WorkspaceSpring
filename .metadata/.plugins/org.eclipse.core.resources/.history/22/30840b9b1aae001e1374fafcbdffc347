@@ -1,0 +1,5 @@
+package com.holamundo.model;
+
+public class Pelicula {
+
+}
