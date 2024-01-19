@@ -1,0 +1,74 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #f0c8a0; /* Color pastel para la cabecera */
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav {
+    background-color: #f6e6d2; /* Color pastel para el menú */
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+li {
+
+    margin-right: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #bd5987;
+}
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    width: 100%;
+}
+
+.productos {
+    flex-basis: 60%; 
+    padding-right: 20px; 
+}
+
+.vista-previa {
+     flex-basis: 40%; 
+    padding-left: 20px; 
+}
+
+
+
+footer {
+    background-color: #f0c8a0; /* Color pastel para el footer */
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    flex-shrink: 0;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles_grid.css">
+	<link rel="stylesheet" href="styles_form.css">
+	<title>Administración</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main>
+
+		<section class="contenedor_grid">
+
+			<article>
+
+				<form th:action="@{/guardarMascota}" th:object="${objeto_entidad}" method="post">
+
+					<label for="nombre">Nombre</label>
+					<input type="text" th:field="*{nombre}" name="nombre" placeholder="Nombre" required>
+
+					<br>
+
+					<label for="edad">Edad</label>
+					<input type="text" id="edad" name="edad" required placeholder="Edad del animal" pattern="^\d+$">
+
+					<br>
+
+					<label for="foto">Foto</label>
+					<input type="text" id="foto" name="foto" required placeholder="Foto del animal">
+
+					<br>
+
+					<label for="descripcion">Descripción</label>
+					<input type="text" id="descripcion" name="descripcion" required
+						placeholder="Descripción del animal">
+
+					<br>
+
+					<label for="fk_especie">Especie</label>
+					<select name="especie.id" th:field="*{especie.id}">
+						<option th:each="elemento : ${atr_lista_especies}" th:value="${elemento.id}" th:text="
+							${elemento.especie}">
+						</option>
+					</select>
+
+					<label for="fk_provincia">Provincia</label>
+					<select name="provincia.id" th:field="*{provincia.id}">
+						<option th:each="elemento : ${atr_lista_provincias}" th:value="${elemento.id}" th:text="
+							${elemento.provincia}">
+						</option>
+					</select>
+
+					<input type="submit" value="Enviar">
+				</form>
+
+			</article>
+
+
+			<div class="botones-derecha">
+				<a href="guardarCSV" class="button-like" >Guardar CSV</a>
+				<a href="restaurarCSV"  class="button-like">Restaurar CSV</a>
+			</div>
+
+
+		</section>
+
+		<br>
+
+		<section>
+
+			<article>
+
+				<table border="1">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Edad</th>
+							<th>Descripcion</th>
+							<th>Foto</th>
+							<th>Especie</th>
+							<th>Provincia</th>
+							<th>Opciones</th>
+
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr th:each="mascota : ${atr_lista_mascotas}">
+							<td th:text="${mascota.id}"></td>
+							<td th:text="${mascota.nombre}"></td>
+							<td th:text="${mascota.edad}"></td>
+							<td th:text="${mascota.descripcion}"></td>
+							<td th:text="${mascota.foto}"></td>
+							<td th:text="${mascota.especie.especie}"></td>
+							<td th:text="${mascota.provincia.provincia}"></td>
+							<td>
+								<a th:href="@{/borrarMascota/{id}(id=${mascota.id})}">Borrar</a>
+								&nbsp;
+								<a th:href="@{/modificarMascota/{id}(id=${mascota.id})}">Modificar</a>
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+
+			</article>
+
+		</section>
+
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>

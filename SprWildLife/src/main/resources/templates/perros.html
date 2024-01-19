@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_grid.css">
+    <title>Perros</title>
+</head>
+
+<body>
+	
+	<div th:include="plantilla.html::cabecera"></div>
+	
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+    <main>
+
+        <section class="contenedor_grid">
+
+			
+			<article th:each="elemento : ${atr_lista_mascotas}">
+				
+			<p class="p_custom" th:text="${elemento.nombre}"></p>
+			
+			<img th:src="'images/' + ${elemento.nombre.toLowerCase() + '.jpg'}" alt="" height="" width="100%">
+			
+			<p th:text="'Años: ' + ${elemento.edad}"></p>
+			
+			<p th:text="'Especie: ' + ${elemento.especie.especie}"></p>
+			
+			<p th:text="'Descripción: ' + ${elemento.descripcion}"></p>
+			
+			<p th:text="'Provincia: ' + ${elemento.provincia.provincia}"></p>
+				
+			</article>
+
+        </section>
+
+
+    </main>
+
+    <div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles_grid.css">
+	<title>Bar Pipo - Sistema de Gestión</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main>
+		<section class="productos">
+
+			<h2>Productos</h2>
+
+			<section class="contenedor_grid">
+
+
+				<article th:each="elemento : ${atr_lista_productos}">
+
+					<img th:src="@{/images/{foto}(foto=${elemento.foto})}" alt="Foto del producto" height="" width="150px" />
+					<h3 th:text="${elemento.nombre}"></h3>
+					<p th:text="${'Precio: $' + elemento.precio}"></p>
+					<p th:text="${'IVA: ' + elemento.iva + '%'}"></p>
+
+				</article>
+
+			</section>
+
+		</section>
+
+		<section class="vista-previa">
+			<!-- Contenido de la vista previa de la factura -->
+		</section>
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>

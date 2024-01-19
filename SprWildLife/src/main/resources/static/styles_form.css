@@ -1,0 +1,79 @@
+/* Estilo para el formulario */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Estilo para las etiquetas de los campos */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilo para los campos de entrada de texto */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Estilo para el botón de enviar */
+input[type="submit"] {
+    background-color: #D81B60;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilo adicional para el botón de enviar al pasar el ratón sobre él */
+input[type="submit"]:hover {
+    background-color: #F4588D;
+}
+
+/* Estilo para las opciones del menú desplegable */
+select option {
+    padding: 5px;
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Estilo para las celdas del encabezado */
+th {
+    background-color: #F4588D;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilo para las celdas de datos */
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Estilo para las filas impares, para mejorar la legibilidad */
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para los enlaces dentro de las celdas de opciones */
+td a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+/* Estilo adicional para los enlaces al pasar el ratón sobre ellos */
+td a:hover {
+    color: #0056b3;
+}
+

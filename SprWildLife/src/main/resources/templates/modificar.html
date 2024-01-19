@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/styles.css}" />
+	<link rel="stylesheet" th:href="@{/styles_grid.css}" />
+	<link rel="stylesheet" th:href="@{/styles_form.css}" />
+	<title>Administración Mascota</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main>
+
+		<section class="contenedor_grid">
+
+			<article>
+
+				<form th:action="@{/modificarMascota}" th:object="${mascota}" method="post">
+					
+					<label for="nombre">Id</label>
+					<input type="text" th:field="*{id}" name="id" placeholder="Id" required readonly>
+
+					<br>
+
+					<label for="nombre">Nombre</label>
+					<input type="text" th:field="*{nombre}" name="nombre" placeholder="Nombre" required>
+
+					<br>
+
+					<label for="edad">Edad</label>
+					<input type="text" th:field="*{edad}" id="edad" name="edad" required placeholder="Edad del animal"
+						pattern="^\d+$">
+
+					<br>
+
+					<label for="foto">Foto</label>
+					<input type="text" th:field="*{foto}" id="foto" name="foto" required placeholder="Foto del animal">
+
+					<br>
+
+					<label for="descripcion">Descripción</label>
+					<input type="text" th:field="*{descripcion}" id="descripcion" name="descripcion" required
+						placeholder="Descripción del animal">
+
+					<br>
+
+					<label for="fk_especie">Especie</label>
+					<select name="especie.id" th:field="*{especie.id}">
+						<option th:each="elemento : ${atr_lista_especies}" th:value="${elemento.id}" th:text="
+							${elemento.especie}">
+						</option>
+					</select>
+
+					<label for="fk_provincia">Provincia</label>
+					<select name="provincia.id" th:field="*{provincia.id}">
+						<option th:each="elemento : ${atr_lista_provincias}" th:value="${elemento.id}" th:text="
+							${elemento.provincia}">
+						</option>
+					</select>
+
+					<input type="submit" value="Enviar">
+				</form>
+
+			</article>
+
+		</section>
+
+
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>
