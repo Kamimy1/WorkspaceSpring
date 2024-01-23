@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<link rel="stylesheet" th:href="@{/styles_grid.css}">
+	<link rel="stylesheet" th:href="@{/styles_table.css}">
+
+	<title>Bar Pipo - Sistema de Gestión</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main class="main_form">
+
+		<form th:action="@{/modificarProducto}" th:object="${producto}" enctype="multipart/form-data" method="post">
+
+			<label for="id">Id:</label>
+			<input type="text" id="id" name="id" th:field="*{id}" readonly>
+
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" th:field="*{nombre}" required>
+
+			<label for="precio">Precio:</label>
+			<input type="number" id="precio" name="precio" th:field="*{precio}" step="0.01" required>
+
+			<label for="iva">IVA:</label>
+			<input type="number" id="iva" name="iva" step="0.01" th:field="*{iva}" required>
+
+			<label for="imagen">Imagen Actual</label>
+
+			<img th:src="@{/images/{foto}(foto=${producto.foto})}" alt="Foto del producto" height="50" width="50" />
+
+			<br>
+
+			<label for="imagen">Nueva Imagen</label>
+			<input type="file" id="imagen" name="imagen" accept="image/*">
+
+
+			<input type="submit" value="Guardar producto">
+		</form>
+
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+
+
+
+</body>
+
+</html>

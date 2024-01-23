@@ -24,25 +24,56 @@
 			<section class="contenedor_grid">
 
 
-				<article th:each="elemento : ${atr_lista_productos}">
-
-					<img th:src="@{/images/{foto}(foto=${elemento.foto})}" alt="Foto del producto" height="" width="150px" />
-					<h3 th:text="${elemento.nombre}"></h3>
-					<p th:text="${'Precio: $' + elemento.precio}"></p>
-					<p th:text="${'IVA: ' + elemento.iva + '%'}"></p>
-
-				</article>
+				<a th:each="elemento : ${atr_lista_productos}" href="#">
+					<article>
+						<img th:src="@{/images/{foto}(foto=${elemento.foto})}" alt="Foto del producto" height=""
+							width="150px" />
+						<h3 th:text="${elemento.nombre}"></h3>
+						<p th:text="${'Precio: $' + elemento.precio}"></p>
+						<p th:text="${'IVA: ' + elemento.iva + '%'}"></p>
+					</article>
+				</a>
 
 			</section>
 
 		</section>
 
+		<div class="separator"></div>
+
 		<section class="vista-previa">
-			<!-- Contenido de la vista previa de la factura -->
+			<div>
+				<img src="images/pipo.png" alt="Logo Bar Pipo" width="100" height="100">
+			</div>
+			<div>
+				<h2>Bar Pipo</h2>
+				<p>Calle Pipillo Nº2</p>
+				<p>CIF: 023309021 - IVA incluido</p>
+				<p>Factura Simplificada</p>
+				<p>Número de Factura</p>
+				<p id="fecha-hora">Fecha y Hora</p>
+
+			</div>
 		</section>
 	</main>
 
 	<div th:include="plantilla.html::footer"></div>
+
+	<script>
+		// Obtener la fecha y hora actual
+		var fechaHora = new Date();
+
+		// Formatear la fecha y hora según el formato deseado
+		var formatoFechaHora = fechaHora.getDate().toString().padStart(2, '0') + '/' +
+			(fechaHora.getMonth() + 1).toString().padStart(2, '0') + '/' +
+			fechaHora.getFullYear() + ' ' +
+			fechaHora.getHours().toString().padStart(2, '0') + ':' +
+			fechaHora.getMinutes().toString().padStart(2, '0');
+
+		// Insertar la fecha y hora en el elemento con id "fecha-hora"
+		document.getElementById('fecha-hora').innerText = formatoFechaHora;
+	</script>
+
+
 
 </body>
 

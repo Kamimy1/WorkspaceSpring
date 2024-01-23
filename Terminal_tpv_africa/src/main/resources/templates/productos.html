@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles_grid.css">
+
+	<link rel="stylesheet" href="styles_table.css">
+
+	<title>Bar Pipo - Sistema de Gestión</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main class="main_form">
+
+		<form th:action="@{/guardarProducto}" th:object="${objeto_entidad}" enctype="multipart/form-data" method="post">
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" required>
+
+			<label for="precio">Precio:</label>
+			<input type="number" id="precio" name="precio" step="0.01" required>
+
+			<label for="iva">IVA:</label>
+			<input type="number" id="iva" name="iva" step="0.01" required>
+
+			<label for="imagen">Imagen:</label>
+			<input type="file" id="imagen" name="imagen" accept="image/*" required>
+			
+			<input type="submit" value="Guardar producto">
+		</form>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Imagen</th>
+					<th>Nombre</th>
+					<th>Precio</th>
+					<th>IVA</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody th:each="elemento : ${atr_lista_productos}">
+				<tr>
+					<td><img th:src="@{/images/{foto}(foto=${elemento.foto})}" alt="Foto del producto" height="50"
+							width="50" /></td>
+					<td th:text="${elemento.nombre}"></td>
+					<td th:text="${'Precio: $' + elemento.precio}"></td>
+					<td th:text="${'IVA: ' + elemento.iva + '%'}"></td>
+					<td>
+						<a th:href="@{/modificarProducto/{id}(id=${elemento.id})}">Modificar</a>
+						<a th:href="@{/admin/borrar/{id}(id=${elemento.id})}">Borrar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+
+
+
+</body>
+
+</html>
