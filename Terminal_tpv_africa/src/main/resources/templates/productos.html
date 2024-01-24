@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="styles_grid.css">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<link rel="stylesheet" th:href="@{/styles_grid.css}">
 
 	<link rel="stylesheet" href="styles_table.css">
 
@@ -56,7 +56,7 @@
 					<td th:text="${'IVA: ' + elemento.iva + '%'}"></td>
 					<td>
 						<a th:href="@{/modificarProducto/{id}(id=${elemento.id})}">Modificar</a>
-						<a th:href="@{/admin/borrar/{id}(id=${elemento.id})}">Borrar</a>
+						<a th:href="@{/borrarProducto/{id}(id=${elemento.id})}">Borrar</a>
 					</td>
 				</tr>
 			</tbody>

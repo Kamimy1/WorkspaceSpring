@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="styles_grid.css">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<link rel="stylesheet" th:href="@{/styles_grid.css}">
 	<title>Bar Pipo - Sistema de Gestión</title>
 </head>
 
@@ -24,7 +24,7 @@
 			<section class="contenedor_grid">
 
 
-				<a th:each="elemento : ${atr_lista_productos}" href="#">
+				<a th:each="elemento : ${atr_lista_productos}" th:href="@{/guardarProdSession/{id}(id=${elemento.id})}">
 					<article>
 						<img th:src="@{/images/{foto}(foto=${elemento.foto})}" alt="Foto del producto" height=""
 							width="150px" />

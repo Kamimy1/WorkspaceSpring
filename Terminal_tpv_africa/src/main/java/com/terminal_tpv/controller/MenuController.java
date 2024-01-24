@@ -1,5 +1,7 @@
 package com.terminal_tpv.controller;
 
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.terminal_tpv.model.Producto;
 import com.terminal_tpv.repository.ProductoRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MenuController {
@@ -41,5 +45,7 @@ public class MenuController {
 
 		return "productos";
 	}
+	
+	
 
 }
