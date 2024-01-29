@@ -17,17 +17,21 @@ public class Ticket {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="fecha")
+
+	@Column(name = "fecha")
 	private String fecha;
-	
-	@Column(name="hora")
+
+	@Column(name = "hora")
 	private String hora;
 
 	@OneToMany
 	private List<Producto> productos;
+
+	public Ticket() {
+		this.productos = new ArrayList<>();
+	}
 
 	public Ticket(int id, String fecha, String hora, List<Producto> listaProductos) {
 		super();
@@ -37,13 +41,7 @@ public class Ticket {
 		this.productos = listaProductos;
 	}
 
-	public Ticket() {
-		super();
-		this.id = 0;
-		this.fecha = "";
-		this.hora = "";
-		this.productos = new ArrayList<Producto>();
-	}
+
 
 	public int getId() {
 		return id;

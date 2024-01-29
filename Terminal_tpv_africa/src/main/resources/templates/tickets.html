@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="styles_grid.css">
+	<link rel="stylesheet" href="styles_tickets.css">
 	<title>Bar Pipo - Sistema de Gestión</title>
 </head>
 
@@ -17,6 +17,28 @@
 
 
 	<main>
+		<div class="container">
+			<table>
+			<tr>
+				<th>ID</th>
+				<th>Fecha</th>
+				<th>Hora</th>
+				<th>Productos</th>
+			</tr>
+			<tr th:each="ticket : ${atr_lista_tickets}">
+				<td th:text="${ticket.id}"></td>
+				<td th:text="${ticket.fecha}"></td>
+				<td th:text="${ticket.hora}"></td>
+				<td>
+					<ul>
+						<li th:each="entry : ${ticket.productos}">
+							<span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		</div>
 
 	</main>
 

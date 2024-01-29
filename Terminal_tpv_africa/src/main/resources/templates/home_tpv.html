@@ -24,12 +24,12 @@
 			<section class="contenedor_grid">
 
 
-				<a th:each="elemento : ${atr_lista_productos}" th:href="@{/guardarProdSession/{id}(id=${elemento.id})}">
+				<a th:each="elemento : ${atr_lista_productos}" th:href="@{/agregarAlTicket/{id}(id=${elemento.id})}">
 					<article>
 						<img th:src="@{/images/{foto}(foto=${elemento.foto})}" alt="Foto del producto" height=""
 							width="150px" />
 						<h3 th:text="${elemento.nombre}"></h3>
-						<p th:text="${'Precio: $' + elemento.precio}"></p>
+						<p th:text="${'Precio: ' + elemento.precio} + ' €'"></p>
 						<p th:text="${'IVA: ' + elemento.iva + '%'}"></p>
 					</article>
 				</a>
@@ -41,6 +41,11 @@
 		<div class="separator"></div>
 
 		<section class="vista-previa">
+			
+			<div>
+				<a th:href="@{/agregarTicket}">Aceptar</a>
+				<a th:href="@{/cancelarTicket}">Cancelar</a>
+			</div>
 			<div>
 				<img src="images/pipo.png" alt="Logo Bar Pipo" width="100" height="100">
 			</div>
@@ -49,8 +54,15 @@
 				<p>Calle Pipillo Nº2</p>
 				<p>CIF: 023309021 - IVA incluido</p>
 				<p>Factura Simplificada</p>
-				<p>Número de Factura</p>
+				<p>Número de Factura: <span th:text="${atr_ultimoId}"></span></p>
 				<p id="fecha-hora">Fecha y Hora</p>
+				<table>
+					<tr th:each="elemento : ${atr_datos_en_sesion}">
+						<td th:text="${elemento.key.nombre}"></td>
+						<td th:text="${elemento.key.precio}+ ' €'"></td>
+						<td th:text="${'x' + elemento.value}"></td>
+					</tr>
+				</table>
 
 			</div>
 		</section>

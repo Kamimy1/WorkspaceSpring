@@ -1,0 +1,170 @@
+/* Reset de estilos para garantizar consistencia en diferentes navegadores */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: 'Arcade';
+	src: url('../fonts/ARCADECLASSIC.TTF') format('truetype');
+}
+
+body {
+	font-family: 'Arcade';
+	/* Fuente estilo píxel */
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: #000;
+	/* Fondo negro para un ambiente de videojuegos arcade */
+	color: #fff;
+	/* Texto blanco */
+}
+
+header {
+	background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+	/* Fondo con efecto arcoíris */
+	color: #000;
+	/* Texto negro */
+	text-align: center;
+	padding: 20px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5em;
+	background-size: 1400% 100%;
+	/* Aumentamos el tamaño para que el gradiente cubra completamente el fondo */
+	animation: rainbow 10s linear infinite;
+	/* Animación de arcoíris */
+}
+
+@keyframes rainbow {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	100% {
+		background-position: 100% 50%;
+	}
+}
+
+
+/* PARA EL NAV */
+
+nav {
+	background-color: #000;
+	/* Fondo negro */
+	padding: 10px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+li {
+	margin-right: 15px;
+}
+
+a {
+	text-decoration: none;
+	color: #ffcc00;
+	/* Amarillo vivo */
+	font-weight: bold;
+	font-size: 16px;
+	transition: color 0.3s ease;
+}
+
+a:hover {
+	color: #ff0000;
+	/* Rojo intenso al pasar el ratón */
+}
+
+/**/
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	display: flex;
+	width: 100%;
+	flex-grow: 1;
+}
+
+form {
+	background-color: #363636;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 500px;
+	width: 100%;
+	border: 5px solid transparent;
+	border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+	border-image-slice: 1;
+}
+
+
+h2 {
+	text-align: center;
+	margin-bottom: 20px;
+	color: #ffcc00;
+	/* Amarillo vivo */
+}
+
+label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
+	color: #ffcc00;
+}
+
+input,
+select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 16px;
+	border: 1px solid #ffcc00;
+	border-radius: 4px;
+	box-sizing: border-box;
+	background-color: #000;
+	/* Fondo negro para los campos de entrada */
+	color: #fff;
+	/* Texto blanco */
+}
+
+button {
+	background-color: #ffcc00;
+	color: #000;
+	border: none;
+	padding: 12px;
+	width: 100%;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #ff0000;
+	/* Rojo intenso al pasar el ratón */
+}
+
+.button-container {
+	text-align: center;
+}
+
+footer {
+	background-color: #000;
+	/* Fondo negro para el pie de página */
+	color: #ffcc00;
+	/* Amarillo vivo para el texto del pie de página */
+	text-align: center;
+	padding: 10px;
+	flex-shrink: 0;
+}

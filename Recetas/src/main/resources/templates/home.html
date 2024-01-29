@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<title>Recetas Pipo</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main>
+
+		<form  th:action="@{/guardarReceta}" method="post">
+			<h2>Agregar Receta</h2>
+
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" required>
+
+			<label for="dificultad">Dificultad:</label>
+			<select id="dificultad" name="dificultad" required>
+
+				<option th:each="dificultades : ${atr_dificultades}" th:value="${dificultades.id}"
+					th:text="${dificultades.dificultad}"></option>
+			</select>
+
+			<div class="button-container">
+				<button type="submit">Guardar</button>
+			</div>
+		</form>
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>

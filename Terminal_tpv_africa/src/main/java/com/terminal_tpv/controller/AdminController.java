@@ -99,7 +99,7 @@ public class AdminController {
 		prodRepo.save(producto);
 		return "redirect:/productos";
 	}
-	
+
 	@RequestMapping("/borrarProducto/{id}")
 	public String borrarMascota(@PathVariable Integer id) {
 		prodRepo.deleteById(id);
