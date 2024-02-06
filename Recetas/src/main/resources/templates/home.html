@@ -17,17 +17,16 @@
 
 	<main>
 
-		<form  th:action="@{/guardarReceta}" method="post">
+		<form  th:action="@{/guardarReceta}" th:object="${objeto_entidad}" method="post">
 			<h2>Agregar Receta</h2>
 
 			<label for="nombre">Nombre:</label>
-			<input type="text" id="nombre" name="nombre" required>
+			<input type="text"  name="nombre" placeholder="Nombre" required>
 
 			<label for="dificultad">Dificultad:</label>
-			<select id="dificultad" name="dificultad" required>
-
-				<option th:each="dificultades : ${atr_dificultades}" th:value="${dificultades.id}"
-					th:text="${dificultades.dificultad}"></option>
+			<select name="dificultad.id" required>
+				<option th:each="dificultad : ${atr_dificultades}" th:value="${dificultad.id}"
+					th:text="${dificultad.dificultad}"></option>
 			</select>
 
 			<div class="button-container">

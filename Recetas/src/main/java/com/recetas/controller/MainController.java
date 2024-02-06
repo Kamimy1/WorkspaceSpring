@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.recetas.model.Dificultades;
+import com.recetas.model.Dificultad;
 import com.recetas.service.DificultadesService;
 
 @Controller
@@ -20,9 +20,8 @@ public class MainController {
 	@RequestMapping("/")
 	public String cargarInicio(Model model) {
 		
-		List<Dificultades> dificultades = dificultadService.obtenerTodasLasDificultades();
+		List<Dificultad> dificultades = dificultadService.obtenerTodasLasDificultades();
 
-        // Pasar las dificultades al modelo
         model.addAttribute("atr_dificultades", dificultades);
 		
 		

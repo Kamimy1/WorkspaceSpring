@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/styles.css}">
+	<title>Recetas Pipo</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main>
+
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre de la Receta</th>
+					<th>Dificultad</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="receta : ${atr_lista_recetas}">
+					<td th:text="${receta.id}"></td>
+					<td th:text="${receta.nombre}"></td>
+					<td th:text="${receta.dificultad.dificultad}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>

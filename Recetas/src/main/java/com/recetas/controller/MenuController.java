@@ -7,7 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.recetas.model.Dificultades;
+import com.recetas.model.Dificultad;
+import com.recetas.model.Receta;
+import com.recetas.repository.DificultadesRepository;
+import com.recetas.repository.RecetasRepository;
 import com.recetas.service.DificultadesService;
 
 @Controller
@@ -15,13 +18,18 @@ public class MenuController {
 
 	@Autowired
 	private DificultadesService dificultadService;
+	
+	@Autowired
+	private RecetasRepository recetasRepo;
+	
+	@Autowired
+	private DificultadesRepository dificultadRepo;
 
 	@RequestMapping("/menu_inicio")
 	public String menu_inicio(Model model) {
 
-		List<Dificultades> dificultades = dificultadService.obtenerTodasLasDificultades();
+		List<Dificultad> dificultades = dificultadService.obtenerTodasLasDificultades();
 
-		// Pasar las dificultades al modelo
 		model.addAttribute("atr_dificultades", dificultades);
 
 		return "home";
@@ -29,8 +37,15 @@ public class MenuController {
 
 	@RequestMapping("/menu_mostrar")
 	public String menu_mostrar(Model model) {
+		
+		List<Receta> listaRecetas = recetasRepo.findAll();
+		List<Dificultad> listaDificultades= dificultadRepo.findAll();
 
-		return "home";
+
+		model.addAttribute("atr_lista_recetas", listaRecetas);
+		model.addAttribute("atr_lista_dificultades", listaDificultades);
+
+		return "mostrar";
 	}
 
 }
