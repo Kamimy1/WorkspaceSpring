@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/styles_ventas.css}">
+	<title>Inmobiliaria Pipo</title>
+</head>
+
+<body>
+
+	<div th:include="plantilla.html::cabecera"></div>
+
+	<div th:include="plantilla.html::navegador" id="navegador"></div>
+
+
+	<main>
+
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Calle</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="vivienda : ${atr_viviendas}">
+					<td th:text="${vivienda.id}"></td>
+					<td th:text="${vivienda.calle}"></td>
+					<td th:text="${vivienda.precio}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+
+
+	</main>
+
+	<div th:include="plantilla.html::footer"></div>
+
+</body>
+
+</html>
