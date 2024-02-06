@@ -21,7 +21,7 @@ public class MainController {
 	@RequestMapping("/")
 	public String cargarInicio(Model model) {
 		
-		List<Vivienda> viviendas = viviendaServ.getAllViviendasAlquiler();
+		List<Vivienda> viviendas = viviendaServ.getAllViviendasVentas();
 
         model.addAttribute("atr_viviendas", viviendas);
 		

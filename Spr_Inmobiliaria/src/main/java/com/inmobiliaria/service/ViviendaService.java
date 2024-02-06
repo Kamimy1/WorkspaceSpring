@@ -14,7 +14,7 @@ public class ViviendaService {
 	@Autowired
     private ViviendaRepository viviendaRep;
 	
-	public List<Vivienda> getAllViviendasAlquiler() {
+	public List<Vivienda> getAllViviendasVentas() {
         return viviendaRep.obtenerViviendasCategoria(1);
     }
 
