@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.inmobiliaria.model.Vivienda;
 import com.inmobiliaria.repository.ViviendaRepository;
+import com.inmobiliaria.service.ViviendaService;
 
 
 @Controller
 public class MainController {
 	
 	@Autowired
-    private ViviendaRepository viviendaRepository;
+    private ViviendaService viviendaServ;
 	
 	@RequestMapping("/")
 	public String cargarInicio(Model model) {
 		
-		List<Vivienda> viviendas = viviendaRepository.obtenerViviendasCategoria(1);
+		List<Vivienda> viviendas = viviendaServ.getAllViviendasAlquiler();
 
         model.addAttribute("atr_viviendas", viviendas);
 		
