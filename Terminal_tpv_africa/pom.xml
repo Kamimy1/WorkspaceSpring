@@ -8,6 +8,7 @@
 		<version>3.2.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>war</packaging>
 	<groupId>com.terminal_tpv</groupId>
 	<artifactId>Terminal_tpv_africa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

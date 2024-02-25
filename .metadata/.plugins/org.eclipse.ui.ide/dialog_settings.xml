@@ -39,6 +39,8 @@
 		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\WorkspaceSpring\PruebaGit_Jabril"/>
+			<item value="D:\WorkspaceSpring\Spr_Inmobiliaria_Alain"/>
 			<item value="D:\WorkspaceSpring\Inventariado_good"/>
 			<item value="D:\WorkspaceSpring\Inventariado"/>
 			<item value=""/>
