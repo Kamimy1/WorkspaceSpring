@@ -12,7 +12,7 @@ public class MainController {
 	@RequestMapping("/")
 	public String cargarInicio(Model model){
 		
-		return "home_mirador_colegiata";
+		return "index";
 		
 	}
 

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circulos con mensajes</title>
+  <style>
+    body{
+      margin:0;
+      padding: 0;
+    }
+    #imagen{
+      
+    }
+
+    .circle {
+      position: absolute;
+      width: 10px;
+      /* Tamaño de los circulos */
+      height: 10px;
+      border-radius: 50%;
+      background-color: rgba(255, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    .message-box {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #000;
+      border-radius: 5%;
+      padding: 10px;
+      z-index: 999;
+    }
+    
+    .close-btn{
+      font-size:0.75em;
+      float:right;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" oncontextmenu="togglePointsCreation(event)">
+
+    <img src="/images/mirador.jpg" alt="Imagen" id="imagen"> <!-- 
+    style="width: 100%; height: auto;"
+    Reemplaza "tu_imagen.jpg" con la ruta de tu imagen -->
+    <!-- Circulos y mensajes -->
+
+  </div>
+
+  <script>
+    var messages = {}; // Almacena los mensajes asociados a cada circulo
+    var circlesData = [{"x":1412,"y":459,"message":"Silo"}]; // Almacena los datos de los circulos
+    var pointsCreationEnabled = false; // Indica si la creacion de puntos esta habilitada
+    var container = document.querySelector('.container');
+    var image = document.getElementById('imagen');
+    
+      //5184 × 3456 px
+
+      //5184          100
+      //ClientWitth   X
+
+
+    // Funcion para activar o desactivar la creacion de puntos al pulsar el boton derecho del raton
+    function togglePointsCreation(event) {
+      event.preventDefault(); // Evita que aparezca el menu contextual del navegador al hacer clic derecho
+      pointsCreationEnabled = !pointsCreationEnabled;
+      if (pointsCreationEnabled) {
+        document.body.style.cursor = 'crosshair'; // Cambia el cursor para indicar que la creacion de puntos esta habilitada
+      } else {
+        document.body.style.cursor = 'auto'; // Restaura el cursor predeterminado
+      }
+    }
+
+    // Funcion para agregar un circulo y su mensaje en las coordenadas donde se hizo clic
+    function addCircle(event) {
+      if (!pointsCreationEnabled) return; // Si la creacion de puntos no esta habilitada, salir de la funcion
+      const rect = image.getBoundingClientRect();
+      var x = (event.clientX - Math.trunc(rect.left));
+      var y = (event.clientY - Math.trunc(rect.top));
+
+
+
+      
+      console.log(
+        'Event Click X: ' + event.clientX+ '\n' + 'Event Click Y: ' +event.clientY
+      );
+      console.log(
+        'Imagen X: '+event.clientX+'-'+'('+Math.trunc(rect.left)+')'+': '+x+'\n' + 'Imagen Y: ' +event.clientY+'-'+'('+Math.trunc(rect.top)+')'+': '+y
+      );
+      console.log(
+        'Offset X: ' + image.offsetWidth+ '\n' + 'Offset Y: ' +image.offsetHeight
+      );
+
+
+      console.log('x:' + x + '\n' + 'y:' + y);
+      var message = prompt("Introduce el mensaje para este circulo:");
+      if (message) {
+      circlesData.push({ x: x, y: y, message: message });
+      renderCircle({ x: x, y: y, message: message });
+      }
+    }
+
+    // Funcion para mostrar el mensaje
+    function showMessage(circle, message) {
+      var messageId = circle.dataset.messageId;
+
+      if (!messageId) {
+        // Si no hay un mensaje asociado con este circulo, crear uno nuevo
+        var messageBox = document.createElement('div');
+        messageBox.className = 'message-box';
+
+        var circleRadius = circle.offsetWidth * 0.5;
+
+        var messageText = document.createTextNode(message);
+        messageBox.style.left = (circle.offsetLeft + circleRadius) + 'px'; // Ajuste para la esquina superior derecha
+        messageBox.style.top = (circle.offsetTop - circleRadius) + 'px'; // Ajuste para la esquina superior derecha
+
+        var closeBtn = document.createElement('span');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&nbsp;&nbsp;<sup style>X</sup>';
+
+        
+        closeBtn.onclick = function () {
+          messageBox.parentNode.removeChild(messageBox);
+          delete messages[messageId]; // Eliminar el mensaje asociado a este circulo
+          delete circle.dataset.messageId; // Eliminar el atributo messageId del circulo
+        };
+        
+        messageBox.appendChild(closeBtn);
+        messageBox.appendChild(messageText);
+
+
+        document.body.appendChild(messageBox);
+
+        // Almacenar el mensaje asociado a este circulo
+        messageId = Date.now(); // Identificador unico del mensaje
+        circle.dataset.messageId = messageId;
+        messages[messageId] = messageBox;
+      }
+
+      // Mostrar el mensaje
+      messages[messageId].style.display = 'block';
+    }
+
+    // Funcion para renderizar un circulo
+    function renderCircle(data) {
+      var container = document.querySelector('.container');
+      var circle = document.createElement('div');
+      circle.className = 'circle';
+      circle.onclick = function () {
+        showMessage(circle, data.message);
+      };
+      circle.style.left = ((data.x-5) + 'px');
+      circle.style.top = ((data.y-5) + 'px');
+      container.appendChild(circle);
+    }
+
+    // Inicializar los circulos predefinidos
+    circlesData.forEach(function (data, index) {
+      renderCircle(data);
+    });
+
+    function extraerInformacion(event) {
+            // Verificar si la tecla presionada es "V" (86 es el codigo ASCII de "V")
+            if (event.keyCode === 86) {
+              console.log("Messages:", JSON.stringify(messages));
+                console.log("CirclesData:", JSON.stringify(circlesData));
+                // Aquí puedes realizar cualquier otra operación con los datos extraídos
+            }
+        }
+
+    // Escuchar los clics en la pagina para agregar circulos si la creacion de puntos esta habilitada
+    document.addEventListener('click', addCircle);
+    document.addEventListener("keypress", extraerInformacion);
+  </script>
+</body>
+
+</html>
