@@ -15,5 +15,19 @@ public class MainController {
 		return "index";
 		
 	}
+	
+	@RequestMapping("/otro")
+	public String cargarOtro(Model model){
+		
+		return "home_mirador_colegiata";
+		
+	}
+	
+	@RequestMapping("/otromas")
+	public String cargarOtroMas(Model model){
+		
+		return "prueba3";
+		
+	}
 
 }

@@ -5,45 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Circulos con mensajes</title>
-  <style>
-    body{
-      margin:0;
-      padding: 0;
-    }
-    #imagen{
-      
-    }
-
-    .circle {
-      position: absolute;
-      width: 10px;
-      /* Tamaño de los circulos */
-      height: 10px;
-      border-radius: 50%;
-      background-color: rgba(255, 0, 0, 0.5);
-      cursor: pointer;
-    }
-
-    .message-box {
-      display: none;
-      position: absolute;
-      background-color: #fff;
-      border: 1px solid #000;
-      border-radius: 5%;
-      padding: 10px;
-      z-index: 999;
-    }
-    
-    .close-btn{
-      font-size:0.75em;
-      float:right;
-    }
-
-    .close-btn {
-      cursor: pointer;
-      float: right;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -53,7 +15,6 @@
     style="width: 100%; height: auto;"
     Reemplaza "tu_imagen.jpg" con la ruta de tu imagen -->
     <!-- Circulos y mensajes -->
-
   </div>
 
   <script>
@@ -62,15 +23,9 @@
     var pointsCreationEnabled = false; // Indica si la creacion de puntos esta habilitada
     var container = document.querySelector('.container');
     var image = document.getElementById('imagen');
-    
-      //5184 × 3456 px
-
-      //5184          100
-      //ClientWitth   X
-
 
     // Funcion para activar o desactivar la creacion de puntos al pulsar el boton derecho del raton
-    function togglePointsCreation(event) {
+    /**function togglePointsCreation(event) {
       event.preventDefault(); // Evita que aparezca el menu contextual del navegador al hacer clic derecho
       pointsCreationEnabled = !pointsCreationEnabled;
       if (pointsCreationEnabled) {
@@ -78,7 +33,7 @@
       } else {
         document.body.style.cursor = 'auto'; // Restaura el cursor predeterminado
       }
-    }
+    }**/
 
     // Funcion para agregar un circulo y su mensaje en las coordenadas donde se hizo clic
     function addCircle(event) {

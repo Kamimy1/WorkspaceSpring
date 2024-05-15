@@ -1,0 +1,249 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Circulos con mensajes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .message-box {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #000;
+            border-radius: 10%;
+            padding: 10px;
+            z-index: 999;
+            text-align: justify;
+        }
+
+        .close-btn {
+            font-size: 0.75em;
+            float: right;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" oncontextmenu="togglePointsCreation(event)">
+        <img src="https://www.osuna.es/export/sites/osuna/.galleries/Mutimedia/Calles/MIRADOR-DE-LA-COLEGIATA.jpg_538135410.jpg"
+            alt="Imagen" id="imagen">
+    </div>
+    <script>
+        var messages = {};
+        var circlesData =
+            [
+                {
+                    "x": 456,
+                    "y": 786,
+                    "message": "Hola, esta semana es una fiesta fun fun fun en navidad lo que queremos es telefonica, el mejor duo por solo 29.80 al mes, estas denominado Si quieres gratis iva, ahora gratis es ohyeah"
+                },
+                {
+                    "x": 1513,
+                    "y": 562,
+                    "message": "2"
+                },
+                {
+                    "x": 168,
+                    "y": 896,
+                    "message": "3"
+                },
+                {
+                    "x": 604,
+                    "y": 218,
+                    "message": "44"
+                }
+            ];
+        var pointsCreationEnabled = false;
+        var ventanaAncho = window.innerWidth;
+        var ventanaAlto = window.innerHeight;
+        var imagen = document.getElementById('imagen');
+
+
+        window.onload = function () {
+            // Obtener el ancho de la ventana en pixeles
+
+            for (var i = 0; i < circlesData.length; i++) {
+                // Acceder al objeto actual
+                var circleData = circlesData[i];
+
+                // Modificar dinámicamente los valores de x e y
+                circleData.x = (window.innerWidth / (imagen.naturalWidth / circleData.x)); // Modificar el valor de x
+                circleData.y = ((window.innerWidth / (imagen.naturalWidth / imagen.naturalHeight)) / (imagen.naturalHeight / circleData.y)); // Modificar el valor de x
+
+
+
+
+                // circleData.x = circleData.x; // Modificar el valor de x
+                // circleData.y = circleData.y; // Modificar el valor de y
+
+                console.log(circleData.x + "\n" + circleData.y);
+
+            }
+            imagen.style.width = ventanaAncho + 'px'; // Establecer el ancho de la imagen
+            // imagen.style.height = ventanaAlto + 'px'; // Establecer el ancho de la imagen
+            // Renderizar los círculos después de haber modificado los datos
+            circlesData.forEach(function (data, index) {
+                renderCircle(data);
+            });
+        }
+        function togglePointsCreation(event) {
+            event.preventDefault(); // Evita que aparezca el menu contextual del navegador al hacer clic derecho
+            pointsCreationEnabled = !pointsCreationEnabled;
+            if (pointsCreationEnabled) {
+                document.body.style.cursor = 'crosshair'; // Cambia el cursor para indicar que la creacion de puntos esta habilitada
+            } else {
+                document.body.style.cursor = 'auto'; // Restaura el cursor predeterminado
+            }
+        }
+
+        function addCircle(event) {
+
+            if (!pointsCreationEnabled) return; // Si la creacion de puntos no esta habilitada, salir de la funcion
+            const rect = imagen.getBoundingClientRect();
+            var x = (event.clientX - Math.trunc(rect.left));
+            var y = (event.clientY - Math.trunc(rect.top));
+
+
+
+
+            console.log(
+                'Event Click X: ' + event.clientX + '\n' + 'Event Click Y: ' + event.clientY
+            );
+            console.log(
+                'Imagen X: ' + event.clientX + '-' + '(' + Math.trunc(rect.left) + ')' + ': ' + x + '\n' + 'Imagen Y: ' + event.clientY + '-' + '(' + Math.trunc(rect.top) + ')' + ': ' + y
+            );
+            console.log(
+                'Offset X: ' + imagen.offsetWidth + '\n' + 'Offset Y: ' + imagen.offsetHeight
+            );
+
+
+            console.log('x:' + x + '\n' + 'y:' + y);
+            var message = prompt("Introduce el mensaje para este circulo:");
+            if (message) {
+                circlesData.push({ x: x, y: y, message: message });
+                renderCircle({ x: x, y: y, message: message });
+            }
+        }
+        // Función para mostrar el mensaje
+        function showMessage(circle, message) {
+            var messageId = circle.dataset.messageId;
+
+            if (!messageId) {
+                // Si no hay un mensaje asociado con este circulo, crear uno nuevo
+                var messageBox = document.createElement('div');
+                messageBox.className = 'message-box';
+
+                var circleRadius = circle.offsetWidth * 0.5;
+
+                var messageText = document.createTextNode(message);
+                messageBox.style.left = (circle.offsetLeft + circleRadius) + 'px'; // Ajuste para la esquina superior derecha
+                messageBox.style.top = (circle.offsetTop - circleRadius) + 'px'; // Ajuste para la esquina superior derecha
+
+
+
+                var closeBtn = document.createElement('span');
+                closeBtn.className = 'close-btn';
+                closeBtn.innerHTML = '&nbsp;&nbsp;<sup style>X</sup>';
+
+                closeBtn.onclick = function () {
+                    messageBox.parentNode.removeChild(messageBox);
+                    delete messages[messageId]; // Eliminar el mensaje asociado a este circulo
+                    delete circle.dataset.messageId; // Eliminar el atributo messageId del circulo
+                };
+
+                messageBox.appendChild(closeBtn);
+                messageBox.appendChild(messageText);
+
+                document.body.appendChild(messageBox);
+
+                // Almacenar el mensaje asociado a este circulo
+                messageId = Date.now(); // Identificador unico del mensaje
+                circle.dataset.messageId = messageId;
+                messages[messageId] = messageBox;
+            }
+
+            requestAnimationFrame(function() {
+                var messageElement = messages[messageId];
+                var numCaracteres = messageElement.innerText.length;
+                var ventanaAncho = window.innerWidth;
+                var imagenAncho = imagen.naturalWidth;
+
+                // Calcular el ancho deseado del mensaje
+                var anchoDeseado = (ventanaAncho / imagenAncho) * numCaracteres * 5;
+
+                // Establecer el nuevo ancho del mensaje
+                messageElement.style.width = anchoDeseado + 'px';
+
+                // Ajustar el tamaño de la fuente del mensaje
+                var fontSize = (ventanaAncho / imagenAncho) * 16; // Ajustar el tamaño de la fuente en relación con el ancho de la imagen y ventana
+                messageElement.style.fontSize = fontSize + 'px';
+
+                // Ajustar el padding y el borde y su radio del contenedor de forma proporcional a la ventana
+                var padding = (ventanaAncho / 100) + 'px';
+                var border = (ventanaAncho / imagenAncho) + 'px';
+                //var borderRadius = (ventanaAncho / imagenAncho) * 5 + '%';
+
+
+                messageElement.style.padding = padding;
+                messageElement.style.borderWidth = border;
+                //messageElement.style.borderRadius = borderRadius;
+            });
+            // Mostrar el mensaje
+            messages[messageId].style.display = 'block';
+        }
+        // Función para renderizar un círculo
+        function renderCircle(data) {
+            var relacionCirculo = (window.innerWidth * 10) / imagen.naturalWidth;
+
+            var container = document.querySelector('.container');
+            var circle = document.createElement('div');
+            circle.className = 'circle';
+
+            circle.onclick = function () {
+                showMessage(circle, data.message);
+            };
+            circle.style.left = ((data.x - (relacionCirculo / 2)) + 'px');
+            circle.style.top = ((data.y - (relacionCirculo / 2)) + 'px');
+            // circle.style.width = ((ventanaAncho * 10) / imagen.naturalWidth) + "px";
+            // circle.style.height = ((ventanaAncho * 10) / imagen.naturalWidth) + "px";
+            circle.style.width = relacionCirculo + "px";
+            circle.style.height = relacionCirculo + "px";
+            container.appendChild(circle);
+        }
+
+
+
+        function extraerInformacion(event) {
+            // Verificar si la tecla presionada es "V" (86 es el codigo ASCII de "V")
+            if (event.keyCode === 86) {
+                console.log("Messages:", JSON.stringify(messages));
+                console.log("CirclesData:", JSON.stringify(circlesData));
+                // Aquí puedes realizar cualquier otra operación con los datos extraídos
+            }
+        }
+
+        // Escuchar los clics en la pagina para agregar circulos si la creacion de puntos esta habilitada
+        document.addEventListener('click', addCircle);
+        document.addEventListener("keypress", extraerInformacion);
+    </script>
+</body>
+
+</html>

@@ -1,48 +1,49 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.full-screen-image {
-    position: relative; /* Necesario para posicionar los puntos */
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ajusta la imagen para cubrir todo el espacio */
+#imagen {
+  /* Estilos para la imagen si es necesario */
 }
 
-.light-point {
-    position: absolute; /* Posiciona el punto sobre la imagen */
-    border-radius: 50%; /* Hace que el punto sea redondo */
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 0, 0.5); /* Color amarillo translúcido */
-    animation: pulsate 2s infinite; /* Animación de pulsación */
-    cursor: pointer; /* Cambia el cursor a una mano para indicar interactividad */
+.circle {
+  position: absolute; /* Posiciona el círculo sobre la imagen */
+  border-radius: 50%; /* Hace que el círculo sea redondo */
+  width: 20px; /* Tamaño del círculo */
+  height: 20px;
+  background: rgba(255, 255, 0, 0.5); /* Color amarillo translúcido */
+  animation: pulsate 2s infinite; /* Animación de pulsación */
+  cursor: pointer; /* Cambia el cursor a una mano para indicar interactividad */
 }
 
 @keyframes pulsate {
-    0% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
+  0% {
+    transform: scale(1); /* Escala normal */
+    opacity: 0.5; /* Opacidad inicial */
+  }
+  50% {
+    transform: scale(1.2); /* Escala durante la pulsación */
+    opacity: 1; /* Opacidad más alta durante la pulsación */
+  }
+  100% {
+    transform: scale(1); /* Vuelve a la escala original */
+    opacity: 0.5; /* Vuelve a la opacidad inicial */
+  }
 }
 
-.tooltip {
-    display: none; /* Inicialmente no visible */
-    position: absolute;
-    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
-    color: white; /* Texto en blanco */
-    padding: 10px; /* Espacio interno */
-    border-radius: 5px; /* Bordes redondeados */
-    white-space: nowrap; /* Evita que el texto se envuelva */
+.message-box {
+  display: none; /* Inicialmente oculto */
+  position: absolute;
+  background-color: #fff; /* Fondo blanco */
+  border: 1px sólido #000; /* Borde negro */
+  border-radius: 5%; /* Bordes redondeados */
+  padding: 10px; /* Espacio interno */
+  z-index: 999; /* Asegura que está por encima de otros elementos */
+}
+
+.close-btn {
+  font-size: 0.75em; /* Tamaño de la fuente */
+  cursor: pointer; /* Cambia el cursor a una mano para indicar interactividad */
+  float: right; /* Alinea el botón de cierre a la derecha */
 }
